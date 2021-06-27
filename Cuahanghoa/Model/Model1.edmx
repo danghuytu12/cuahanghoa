@@ -1,0 +1,594 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CuahanghoaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Khachhang">
+          <Key>
+            <PropertyRef Name="Idkhachhang" />
+          </Key>
+          <Property Name="Idkhachhang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tenkhachhang" Type="nvarchar(max)" />
+          <Property Name="Ngaysinh" Type="datetime" />
+          <Property Name="Diachi" Type="nvarchar(max)" />
+          <Property Name="Dienthoai" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Nguoidung">
+          <Key>
+            <PropertyRef Name="Idnguoidung" />
+          </Key>
+          <Property Name="Idnguoidung" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tenhienthi" Type="nvarchar(max)" />
+          <Property Name="Tendangnhap" Type="nvarchar" MaxLength="100" />
+          <Property Name="Matkhau" Type="nvarchar" MaxLength="50" />
+          <Property Name="Idquyen" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Nhacungcap">
+          <Key>
+            <PropertyRef Name="Idnhacungcap" />
+          </Key>
+          <Property Name="Idnhacungcap" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tennhacungcap" Type="nvarchar(max)" />
+          <Property Name="Diachi" Type="nvarchar(max)" />
+          <Property Name="Dienthoai" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Phanquyennguoidung">
+          <Key>
+            <PropertyRef Name="Idquyen" />
+          </Key>
+          <Property Name="Idquyen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tenhienthi" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Phieunhap">
+          <Key>
+            <PropertyRef Name="Idphieunhap" />
+          </Key>
+          <Property Name="Idphieunhap" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Ngaynhap" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Phieunhapchitiet">
+          <Key>
+            <PropertyRef Name="Idphieunhapchitiet" />
+          </Key>
+          <Property Name="Idphieunhapchitiet" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Idphieunhap" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Idsanpham" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Soluong" Type="int" />
+          <Property Name="Gianhap" Type="float" />
+          <Property Name="Giaxuat" Type="float" />
+        </EntityType>
+        <EntityType Name="Phieuxuat">
+          <Key>
+            <PropertyRef Name="Idphieuxuat" />
+          </Key>
+          <Property Name="Idphieuxuat" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Ngayxuat" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Phieuxuatchitiet">
+          <Key>
+            <PropertyRef Name="Idphieuxuatchitiet" />
+          </Key>
+          <Property Name="Idphieuxuatchitiet" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Idphieuxuat" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Idsanpham" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Idphieunhapchitiet" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Idkhachhang" Type="int" Nullable="false" />
+          <Property Name="Soluong" Type="int" />
+          <Property Name="Tongtien" Type="float" />
+        </EntityType>
+        <EntityType Name="Sanpham">
+          <Key>
+            <PropertyRef Name="Idsanpham" />
+          </Key>
+          <Property Name="Idsanpham" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Tensanpham" Type="nvarchar(max)" />
+          <Property Name="Idnhacungcap" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Nguoidung__Idquy__2D27B809">
+          <End Role="Phanquyennguoidung" Type="Self.Phanquyennguoidung" Multiplicity="1" />
+          <End Role="Nguoidung" Type="Self.Nguoidung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phanquyennguoidung">
+              <PropertyRef Name="Idquyen" />
+            </Principal>
+            <Dependent Role="Nguoidung">
+              <PropertyRef Name="Idquyen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Phieunhap__Idphi__33D4B598">
+          <End Role="Phieunhap" Type="Self.Phieunhap" Multiplicity="1" />
+          <End Role="Phieunhapchitiet" Type="Self.Phieunhapchitiet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phieunhap">
+              <PropertyRef Name="Idphieunhap" />
+            </Principal>
+            <Dependent Role="Phieunhapchitiet">
+              <PropertyRef Name="Idphieunhap" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Phieunhap__Idsan__34C8D9D1">
+          <End Role="Sanpham" Type="Self.Sanpham" Multiplicity="1" />
+          <End Role="Phieunhapchitiet" Type="Self.Phieunhapchitiet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sanpham">
+              <PropertyRef Name="Idsanpham" />
+            </Principal>
+            <Dependent Role="Phieunhapchitiet">
+              <PropertyRef Name="Idsanpham" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Phieuxuat__Idkha__3D5E1FD2">
+          <End Role="Khachhang" Type="Self.Khachhang" Multiplicity="1" />
+          <End Role="Phieuxuatchitiet" Type="Self.Phieuxuatchitiet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Khachhang">
+              <PropertyRef Name="Idkhachhang" />
+            </Principal>
+            <Dependent Role="Phieuxuatchitiet">
+              <PropertyRef Name="Idkhachhang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Phieuxuat__Idphi__3A81B327">
+          <End Role="Phieuxuat" Type="Self.Phieuxuat" Multiplicity="1" />
+          <End Role="Phieuxuatchitiet" Type="Self.Phieuxuatchitiet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phieuxuat">
+              <PropertyRef Name="Idphieuxuat" />
+            </Principal>
+            <Dependent Role="Phieuxuatchitiet">
+              <PropertyRef Name="Idphieuxuat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Phieuxuat__Idphi__3C69FB99">
+          <End Role="Phieunhapchitiet" Type="Self.Phieunhapchitiet" Multiplicity="1" />
+          <End Role="Phieuxuatchitiet" Type="Self.Phieuxuatchitiet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phieunhapchitiet">
+              <PropertyRef Name="Idphieunhapchitiet" />
+            </Principal>
+            <Dependent Role="Phieuxuatchitiet">
+              <PropertyRef Name="Idphieunhapchitiet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Phieuxuat__Idsan__3B75D760">
+          <End Role="Sanpham" Type="Self.Sanpham" Multiplicity="1" />
+          <End Role="Phieuxuatchitiet" Type="Self.Phieuxuatchitiet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sanpham">
+              <PropertyRef Name="Idsanpham" />
+            </Principal>
+            <Dependent Role="Phieuxuatchitiet">
+              <PropertyRef Name="Idsanpham" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sanpham__Idnhacu__286302EC">
+          <End Role="Nhacungcap" Type="Self.Nhacungcap" Multiplicity="1" />
+          <End Role="Sanpham" Type="Self.Sanpham" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nhacungcap">
+              <PropertyRef Name="Idnhacungcap" />
+            </Principal>
+            <Dependent Role="Sanpham">
+              <PropertyRef Name="Idnhacungcap" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CuahanghoaModelStoreContainer">
+          <EntitySet Name="Khachhang" EntityType="Self.Khachhang" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nguoidung" EntityType="Self.Nguoidung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nhacungcap" EntityType="Self.Nhacungcap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Phanquyennguoidung" EntityType="Self.Phanquyennguoidung" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Phieunhap" EntityType="Self.Phieunhap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Phieunhapchitiet" EntityType="Self.Phieunhapchitiet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Phieuxuat" EntityType="Self.Phieuxuat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Phieuxuatchitiet" EntityType="Self.Phieuxuatchitiet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sanpham" EntityType="Self.Sanpham" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Nguoidung__Idquy__2D27B809" Association="Self.FK__Nguoidung__Idquy__2D27B809">
+            <End Role="Phanquyennguoidung" EntitySet="Phanquyennguoidung" />
+            <End Role="Nguoidung" EntitySet="Nguoidung" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Phieunhap__Idphi__33D4B598" Association="Self.FK__Phieunhap__Idphi__33D4B598">
+            <End Role="Phieunhap" EntitySet="Phieunhap" />
+            <End Role="Phieunhapchitiet" EntitySet="Phieunhapchitiet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Phieunhap__Idsan__34C8D9D1" Association="Self.FK__Phieunhap__Idsan__34C8D9D1">
+            <End Role="Sanpham" EntitySet="Sanpham" />
+            <End Role="Phieunhapchitiet" EntitySet="Phieunhapchitiet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Phieuxuat__Idkha__3D5E1FD2" Association="Self.FK__Phieuxuat__Idkha__3D5E1FD2">
+            <End Role="Khachhang" EntitySet="Khachhang" />
+            <End Role="Phieuxuatchitiet" EntitySet="Phieuxuatchitiet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Phieuxuat__Idphi__3A81B327" Association="Self.FK__Phieuxuat__Idphi__3A81B327">
+            <End Role="Phieuxuat" EntitySet="Phieuxuat" />
+            <End Role="Phieuxuatchitiet" EntitySet="Phieuxuatchitiet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Phieuxuat__Idphi__3C69FB99" Association="Self.FK__Phieuxuat__Idphi__3C69FB99">
+            <End Role="Phieunhapchitiet" EntitySet="Phieunhapchitiet" />
+            <End Role="Phieuxuatchitiet" EntitySet="Phieuxuatchitiet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Phieuxuat__Idsan__3B75D760" Association="Self.FK__Phieuxuat__Idsan__3B75D760">
+            <End Role="Sanpham" EntitySet="Sanpham" />
+            <End Role="Phieuxuatchitiet" EntitySet="Phieuxuatchitiet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sanpham__Idnhacu__286302EC" Association="Self.FK__Sanpham__Idnhacu__286302EC">
+            <End Role="Nhacungcap" EntitySet="Nhacungcap" />
+            <End Role="Sanpham" EntitySet="Sanpham" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CuahanghoaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Khachhang">
+          <Key>
+            <PropertyRef Name="Idkhachhang" />
+          </Key>
+          <Property Name="Idkhachhang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tenkhachhang" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ngaysinh" Type="DateTime" Precision="3" />
+          <Property Name="Diachi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Dienthoai" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Phieuxuatchitiet" Relationship="Self.FK__Phieuxuat__Idkha__3D5E1FD2" FromRole="Khachhang" ToRole="Phieuxuatchitiet" />
+        </EntityType>
+        <EntityType Name="Nguoidung">
+          <Key>
+            <PropertyRef Name="Idnguoidung" />
+          </Key>
+          <Property Name="Idnguoidung" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tenhienthi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tendangnhap" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Matkhau" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Idquyen" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Phanquyennguoidung" Relationship="Self.FK__Nguoidung__Idquy__2D27B809" FromRole="Nguoidung" ToRole="Phanquyennguoidung" />
+        </EntityType>
+        <EntityType Name="Nhacungcap">
+          <Key>
+            <PropertyRef Name="Idnhacungcap" />
+          </Key>
+          <Property Name="Idnhacungcap" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tennhacungcap" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Diachi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Dienthoai" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sanpham" Relationship="Self.FK__Sanpham__Idnhacu__286302EC" FromRole="Nhacungcap" ToRole="Sanpham" />
+        </EntityType>
+        <EntityType Name="Phanquyennguoidung">
+          <Key>
+            <PropertyRef Name="Idquyen" />
+          </Key>
+          <Property Name="Idquyen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tenhienthi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Nguoidung" Relationship="Self.FK__Nguoidung__Idquy__2D27B809" FromRole="Phanquyennguoidung" ToRole="Nguoidung" />
+        </EntityType>
+        <EntityType Name="Phieunhap">
+          <Key>
+            <PropertyRef Name="Idphieunhap" />
+          </Key>
+          <Property Name="Idphieunhap" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ngaynhap" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Phieunhapchitiet" Relationship="Self.FK__Phieunhap__Idphi__33D4B598" FromRole="Phieunhap" ToRole="Phieunhapchitiet" />
+        </EntityType>
+        <EntityType Name="Phieunhapchitiet">
+          <Key>
+            <PropertyRef Name="Idphieunhapchitiet" />
+          </Key>
+          <Property Name="Idphieunhapchitiet" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Idphieunhap" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Idsanpham" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Soluong" Type="Int32" />
+          <Property Name="Gianhap" Type="Double" />
+          <Property Name="Giaxuat" Type="Double" />
+          <NavigationProperty Name="Phieunhap" Relationship="Self.FK__Phieunhap__Idphi__33D4B598" FromRole="Phieunhapchitiet" ToRole="Phieunhap" />
+          <NavigationProperty Name="Sanpham" Relationship="Self.FK__Phieunhap__Idsan__34C8D9D1" FromRole="Phieunhapchitiet" ToRole="Sanpham" />
+          <NavigationProperty Name="Phieuxuatchitiet" Relationship="Self.FK__Phieuxuat__Idphi__3C69FB99" FromRole="Phieunhapchitiet" ToRole="Phieuxuatchitiet" />
+        </EntityType>
+        <EntityType Name="Phieuxuat">
+          <Key>
+            <PropertyRef Name="Idphieuxuat" />
+          </Key>
+          <Property Name="Idphieuxuat" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ngayxuat" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Phieuxuatchitiet" Relationship="Self.FK__Phieuxuat__Idphi__3A81B327" FromRole="Phieuxuat" ToRole="Phieuxuatchitiet" />
+        </EntityType>
+        <EntityType Name="Phieuxuatchitiet">
+          <Key>
+            <PropertyRef Name="Idphieuxuatchitiet" />
+          </Key>
+          <Property Name="Idphieuxuatchitiet" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Idphieuxuat" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Idsanpham" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Idphieunhapchitiet" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Idkhachhang" Type="Int32" Nullable="false" />
+          <Property Name="Soluong" Type="Int32" />
+          <Property Name="Tongtien" Type="Double" />
+          <NavigationProperty Name="Khachhang" Relationship="Self.FK__Phieuxuat__Idkha__3D5E1FD2" FromRole="Phieuxuatchitiet" ToRole="Khachhang" />
+          <NavigationProperty Name="Phieunhapchitiet" Relationship="Self.FK__Phieuxuat__Idphi__3C69FB99" FromRole="Phieuxuatchitiet" ToRole="Phieunhapchitiet" />
+          <NavigationProperty Name="Phieuxuat" Relationship="Self.FK__Phieuxuat__Idphi__3A81B327" FromRole="Phieuxuatchitiet" ToRole="Phieuxuat" />
+          <NavigationProperty Name="Sanpham" Relationship="Self.FK__Phieuxuat__Idsan__3B75D760" FromRole="Phieuxuatchitiet" ToRole="Sanpham" />
+        </EntityType>
+        <EntityType Name="Sanpham">
+          <Key>
+            <PropertyRef Name="Idsanpham" />
+          </Key>
+          <Property Name="Idsanpham" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Tensanpham" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Idnhacungcap" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Nhacungcap" Relationship="Self.FK__Sanpham__Idnhacu__286302EC" FromRole="Sanpham" ToRole="Nhacungcap" />
+          <NavigationProperty Name="Phieunhapchitiet" Relationship="Self.FK__Phieunhap__Idsan__34C8D9D1" FromRole="Sanpham" ToRole="Phieunhapchitiet" />
+          <NavigationProperty Name="Phieuxuatchitiet" Relationship="Self.FK__Phieuxuat__Idsan__3B75D760" FromRole="Sanpham" ToRole="Phieuxuatchitiet" />
+        </EntityType>
+        <Association Name="FK__Phieuxuat__Idkha__3D5E1FD2">
+          <End Role="Khachhang" Type="Self.Khachhang" Multiplicity="1" />
+          <End Role="Phieuxuatchitiet" Type="Self.Phieuxuatchitiet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Khachhang">
+              <PropertyRef Name="Idkhachhang" />
+            </Principal>
+            <Dependent Role="Phieuxuatchitiet">
+              <PropertyRef Name="Idkhachhang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Nguoidung__Idquy__2D27B809">
+          <End Role="Phanquyennguoidung" Type="Self.Phanquyennguoidung" Multiplicity="1" />
+          <End Role="Nguoidung" Type="Self.Nguoidung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phanquyennguoidung">
+              <PropertyRef Name="Idquyen" />
+            </Principal>
+            <Dependent Role="Nguoidung">
+              <PropertyRef Name="Idquyen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Sanpham__Idnhacu__286302EC">
+          <End Role="Nhacungcap" Type="Self.Nhacungcap" Multiplicity="1" />
+          <End Role="Sanpham" Type="Self.Sanpham" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Nhacungcap">
+              <PropertyRef Name="Idnhacungcap" />
+            </Principal>
+            <Dependent Role="Sanpham">
+              <PropertyRef Name="Idnhacungcap" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Phieunhap__Idphi__33D4B598">
+          <End Role="Phieunhap" Type="Self.Phieunhap" Multiplicity="1" />
+          <End Role="Phieunhapchitiet" Type="Self.Phieunhapchitiet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phieunhap">
+              <PropertyRef Name="Idphieunhap" />
+            </Principal>
+            <Dependent Role="Phieunhapchitiet">
+              <PropertyRef Name="Idphieunhap" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Phieunhap__Idsan__34C8D9D1">
+          <End Role="Sanpham" Type="Self.Sanpham" Multiplicity="1" />
+          <End Role="Phieunhapchitiet" Type="Self.Phieunhapchitiet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sanpham">
+              <PropertyRef Name="Idsanpham" />
+            </Principal>
+            <Dependent Role="Phieunhapchitiet">
+              <PropertyRef Name="Idsanpham" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Phieuxuat__Idphi__3C69FB99">
+          <End Role="Phieunhapchitiet" Type="Self.Phieunhapchitiet" Multiplicity="1" />
+          <End Role="Phieuxuatchitiet" Type="Self.Phieuxuatchitiet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phieunhapchitiet">
+              <PropertyRef Name="Idphieunhapchitiet" />
+            </Principal>
+            <Dependent Role="Phieuxuatchitiet">
+              <PropertyRef Name="Idphieunhapchitiet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Phieuxuat__Idphi__3A81B327">
+          <End Role="Phieuxuat" Type="Self.Phieuxuat" Multiplicity="1" />
+          <End Role="Phieuxuatchitiet" Type="Self.Phieuxuatchitiet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phieuxuat">
+              <PropertyRef Name="Idphieuxuat" />
+            </Principal>
+            <Dependent Role="Phieuxuatchitiet">
+              <PropertyRef Name="Idphieuxuat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Phieuxuat__Idsan__3B75D760">
+          <End Role="Sanpham" Type="Self.Sanpham" Multiplicity="1" />
+          <End Role="Phieuxuatchitiet" Type="Self.Phieuxuatchitiet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sanpham">
+              <PropertyRef Name="Idsanpham" />
+            </Principal>
+            <Dependent Role="Phieuxuatchitiet">
+              <PropertyRef Name="Idsanpham" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CuahanghoaEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Khachhang" EntityType="Self.Khachhang" />
+          <EntitySet Name="Nguoidung" EntityType="Self.Nguoidung" />
+          <EntitySet Name="Nhacungcap" EntityType="Self.Nhacungcap" />
+          <EntitySet Name="Phanquyennguoidung" EntityType="Self.Phanquyennguoidung" />
+          <EntitySet Name="Phieunhap" EntityType="Self.Phieunhap" />
+          <EntitySet Name="Phieunhapchitiet" EntityType="Self.Phieunhapchitiet" />
+          <EntitySet Name="Phieuxuat" EntityType="Self.Phieuxuat" />
+          <EntitySet Name="Phieuxuatchitiet" EntityType="Self.Phieuxuatchitiet" />
+          <EntitySet Name="Sanpham" EntityType="Self.Sanpham" />
+          <AssociationSet Name="FK__Phieuxuat__Idkha__3D5E1FD2" Association="Self.FK__Phieuxuat__Idkha__3D5E1FD2">
+            <End Role="Khachhang" EntitySet="Khachhang" />
+            <End Role="Phieuxuatchitiet" EntitySet="Phieuxuatchitiet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Nguoidung__Idquy__2D27B809" Association="Self.FK__Nguoidung__Idquy__2D27B809">
+            <End Role="Phanquyennguoidung" EntitySet="Phanquyennguoidung" />
+            <End Role="Nguoidung" EntitySet="Nguoidung" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Sanpham__Idnhacu__286302EC" Association="Self.FK__Sanpham__Idnhacu__286302EC">
+            <End Role="Nhacungcap" EntitySet="Nhacungcap" />
+            <End Role="Sanpham" EntitySet="Sanpham" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Phieunhap__Idphi__33D4B598" Association="Self.FK__Phieunhap__Idphi__33D4B598">
+            <End Role="Phieunhap" EntitySet="Phieunhap" />
+            <End Role="Phieunhapchitiet" EntitySet="Phieunhapchitiet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Phieunhap__Idsan__34C8D9D1" Association="Self.FK__Phieunhap__Idsan__34C8D9D1">
+            <End Role="Sanpham" EntitySet="Sanpham" />
+            <End Role="Phieunhapchitiet" EntitySet="Phieunhapchitiet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Phieuxuat__Idphi__3C69FB99" Association="Self.FK__Phieuxuat__Idphi__3C69FB99">
+            <End Role="Phieunhapchitiet" EntitySet="Phieunhapchitiet" />
+            <End Role="Phieuxuatchitiet" EntitySet="Phieuxuatchitiet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Phieuxuat__Idphi__3A81B327" Association="Self.FK__Phieuxuat__Idphi__3A81B327">
+            <End Role="Phieuxuat" EntitySet="Phieuxuat" />
+            <End Role="Phieuxuatchitiet" EntitySet="Phieuxuatchitiet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Phieuxuat__Idsan__3B75D760" Association="Self.FK__Phieuxuat__Idsan__3B75D760">
+            <End Role="Sanpham" EntitySet="Sanpham" />
+            <End Role="Phieuxuatchitiet" EntitySet="Phieuxuatchitiet" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CuahanghoaModelStoreContainer" CdmEntityContainer="CuahanghoaEntities1">
+          <EntitySetMapping Name="Khachhang">
+            <EntityTypeMapping TypeName="CuahanghoaModel.Khachhang">
+              <MappingFragment StoreEntitySet="Khachhang">
+                <ScalarProperty Name="Idkhachhang" ColumnName="Idkhachhang" />
+                <ScalarProperty Name="Tenkhachhang" ColumnName="Tenkhachhang" />
+                <ScalarProperty Name="Ngaysinh" ColumnName="Ngaysinh" />
+                <ScalarProperty Name="Diachi" ColumnName="Diachi" />
+                <ScalarProperty Name="Dienthoai" ColumnName="Dienthoai" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nguoidung">
+            <EntityTypeMapping TypeName="CuahanghoaModel.Nguoidung">
+              <MappingFragment StoreEntitySet="Nguoidung">
+                <ScalarProperty Name="Idnguoidung" ColumnName="Idnguoidung" />
+                <ScalarProperty Name="Tenhienthi" ColumnName="Tenhienthi" />
+                <ScalarProperty Name="Tendangnhap" ColumnName="Tendangnhap" />
+                <ScalarProperty Name="Matkhau" ColumnName="Matkhau" />
+                <ScalarProperty Name="Idquyen" ColumnName="Idquyen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nhacungcap">
+            <EntityTypeMapping TypeName="CuahanghoaModel.Nhacungcap">
+              <MappingFragment StoreEntitySet="Nhacungcap">
+                <ScalarProperty Name="Idnhacungcap" ColumnName="Idnhacungcap" />
+                <ScalarProperty Name="Tennhacungcap" ColumnName="Tennhacungcap" />
+                <ScalarProperty Name="Diachi" ColumnName="Diachi" />
+                <ScalarProperty Name="Dienthoai" ColumnName="Dienthoai" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Phanquyennguoidung">
+            <EntityTypeMapping TypeName="CuahanghoaModel.Phanquyennguoidung">
+              <MappingFragment StoreEntitySet="Phanquyennguoidung">
+                <ScalarProperty Name="Idquyen" ColumnName="Idquyen" />
+                <ScalarProperty Name="Tenhienthi" ColumnName="Tenhienthi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Phieunhap">
+            <EntityTypeMapping TypeName="CuahanghoaModel.Phieunhap">
+              <MappingFragment StoreEntitySet="Phieunhap">
+                <ScalarProperty Name="Idphieunhap" ColumnName="Idphieunhap" />
+                <ScalarProperty Name="Ngaynhap" ColumnName="Ngaynhap" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Phieunhapchitiet">
+            <EntityTypeMapping TypeName="CuahanghoaModel.Phieunhapchitiet">
+              <MappingFragment StoreEntitySet="Phieunhapchitiet">
+                <ScalarProperty Name="Idphieunhapchitiet" ColumnName="Idphieunhapchitiet" />
+                <ScalarProperty Name="Idphieunhap" ColumnName="Idphieunhap" />
+                <ScalarProperty Name="Idsanpham" ColumnName="Idsanpham" />
+                <ScalarProperty Name="Soluong" ColumnName="Soluong" />
+                <ScalarProperty Name="Gianhap" ColumnName="Gianhap" />
+                <ScalarProperty Name="Giaxuat" ColumnName="Giaxuat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Phieuxuat">
+            <EntityTypeMapping TypeName="CuahanghoaModel.Phieuxuat">
+              <MappingFragment StoreEntitySet="Phieuxuat">
+                <ScalarProperty Name="Idphieuxuat" ColumnName="Idphieuxuat" />
+                <ScalarProperty Name="Ngayxuat" ColumnName="Ngayxuat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Phieuxuatchitiet">
+            <EntityTypeMapping TypeName="CuahanghoaModel.Phieuxuatchitiet">
+              <MappingFragment StoreEntitySet="Phieuxuatchitiet">
+                <ScalarProperty Name="Idphieuxuatchitiet" ColumnName="Idphieuxuatchitiet" />
+                <ScalarProperty Name="Idphieuxuat" ColumnName="Idphieuxuat" />
+                <ScalarProperty Name="Idsanpham" ColumnName="Idsanpham" />
+                <ScalarProperty Name="Idphieunhapchitiet" ColumnName="Idphieunhapchitiet" />
+                <ScalarProperty Name="Idkhachhang" ColumnName="Idkhachhang" />
+                <ScalarProperty Name="Soluong" ColumnName="Soluong" />
+                <ScalarProperty Name="Tongtien" ColumnName="Tongtien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sanpham">
+            <EntityTypeMapping TypeName="CuahanghoaModel.Sanpham">
+              <MappingFragment StoreEntitySet="Sanpham">
+                <ScalarProperty Name="Idsanpham" ColumnName="Idsanpham" />
+                <ScalarProperty Name="Tensanpham" ColumnName="Tensanpham" />
+                <ScalarProperty Name="Idnhacungcap" ColumnName="Idnhacungcap" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

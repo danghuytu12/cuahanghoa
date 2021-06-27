@@ -1,0 +1,84 @@
+﻿<Window x:Class="Cuahanghoa.Quanlysanpham"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cuahanghoa"
+        xmlns:uc="clr-namespace:Cuahanghoa.UserControlShop"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        Name="quanlysanpham"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        DataContext="{StaticResource SanphamVM}"
+        Title="Quản Lý Sản Phẩm" Height="400" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition ></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=quanlysanpham}"></uc:ControlBarUC>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <materialDesign:Card Grid.Row="0" Margin="5">
+                <WrapPanel Margin="0 0 0 10">
+                    <TextBox Text="{Binding Idsanpham,UpdateSourceTrigger=PropertyChanged}"
+                          materialDesign:HintAssist.Hint="ID" Margin="5 5 15 5"
+                             
+                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <TextBox Text="{Binding Tensanpham,UpdateSourceTrigger=PropertyChanged}"
+                          materialDesign:HintAssist.Hint="Tên Sản Phẩm" Margin="5 5 15 5"
+                         
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <ComboBox ItemsSource="{Binding Nhacungcap }" Margin="5 5 15 1"
+                              DisplayMemberPath="Tennhacungcap" 
+                              
+                              SelectedItem="{Binding SelectedNhacungcap , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              materialDesign:HintAssist.Hint="Nhà Cung Cấp"
+                              Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                    </ComboBox>
+ 
+                </WrapPanel>
+            </materialDesign:Card>
+
+            <materialDesign:Card Grid.Row="1" Margin="5">
+                <WrapPanel>
+                    <Button Command="{Binding AddCommand}" Content="Thêm" Margin="5" Width="100"></Button>
+                    <Button Command="{Binding EditCommand}" Content="Sửa" Margin="5" Width="100"></Button>
+                    <Button Command="{Binding DeleteCommand}" Content="Xóa" Margin="5" Width="100"></Button>
+                </WrapPanel>
+            </materialDesign:Card>
+
+            <materialDesign:Card Grid.Row="2" Margin="5" VerticalAlignment="Stretch">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Idsanpham}"></GridViewColumn>
+                                <GridViewColumn Header="Tên Sản Phẩm"  DisplayMemberBinding="{Binding Tensanpham}"></GridViewColumn>
+                                <GridViewColumn Header="Nhà Cung Cấp" DisplayMemberBinding="{Binding Nhacungcap.Tennhacungcap}"></GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+            </materialDesign:Card>
+        </Grid>
+    </Grid>
+</Window>
+

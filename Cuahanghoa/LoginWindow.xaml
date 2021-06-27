@@ -1,0 +1,90 @@
+﻿<Window x:Class="Cuahanghoa.loginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cuahanghoa"
+        xmlns:uc="clr-namespace:Cuahanghoa.UserControlShop"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d"
+        DataContext="{StaticResource LoginVM}"
+        Name="login"
+        Title="Đăng Nhập" Height="500" Width="350">
+    <Grid>
+        
+        <Grid >
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=login}"></uc:ControlBarUC>
+        </Grid>
+
+        <Grid>
+            <Rectangle Height="300" VerticalAlignment="Top">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0.5">
+                        <GradientStop Color="#53D" ></GradientStop>
+                        <GradientStop Color="#d36" Offset="1"></GradientStop>
+                        <GradientStop Color="#fb5" Offset="-0.5"></GradientStop>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Image Source="/Image/home.png" Width="100" Height="100" VerticalAlignment="Top" Margin="20"></Image>
+            <Rectangle RadiusX="20" RadiusY="20" Height="240" Width="280" Fill="White" VerticalAlignment="Bottom" Margin="0,100">
+                <Rectangle.Effect>
+                    <DropShadowEffect BlurRadius="15" RenderingBias="Quality" Direction="0" ShadowDepth="1" Color="#FFBBBB"></DropShadowEffect>
+                </Rectangle.Effect>
+            </Rectangle>
+            <Grid Width="280" Height="240" VerticalAlignment="Bottom" Margin="0,100">
+                <TextBlock Text="Đăng Nhập" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="18" Margin="5" Foreground="BlueViolet"  />
+                <StackPanel VerticalAlignment="Center" Margin="10">
+                    <TextBox materialDesign:HintAssist.Hint="Tên Đăng Nhập" 
+                             Text="{Binding UserName}"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         Margin="0,10"/>
+                    <PasswordBox x:Name="FloatingPasswordBox"  
+                                Margin="0,10"
+                                 materialDesign:HintAssist.Hint="Mật Khẩu" 
+                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="PasswordChanged">
+                                <i:InvokeCommandAction 
+                                    Command="{Binding PasswordChangedCommand}" 
+                                    CommandParameter="{Binding ElementName=FloatingPasswordBox}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                    </PasswordBox>
+                </StackPanel>
+            </Grid>
+            <Button VerticalAlignment="Bottom" Margin="50 300 150 85" Background="#53d"
+                Width="120" HorizontalAlignment="Left"
+                            IsDefault="True"
+                            Command="{Binding LoginCommand}"
+                            CommandParameter="{Binding ElementName=login}"
+                            Style="{StaticResource MaterialDesignRaisedButton}" 
+                            ToolTip="Resource name: MaterialDesignRaisedButton"
+                            Content="Đăng Nhập">
+            </Button>
+            <Button VerticalAlignment="Bottom" 
+                        Margin="100 300 50 85"
+                        Background="#f23"
+                        Width="120" 
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource MaterialDesignRaisedButton}"  
+                        Command="{Binding CloseCommand}"
+                        CommandParameter="{Binding ElementName=login}"
+                        ToolTip="Resource name: MaterialDesignRaisedButton"
+                        Content="Thoát">
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

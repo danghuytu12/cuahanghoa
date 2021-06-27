@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6aa55779d139472087ab77458d944e7c" Name="Diagram1">
+        <EntityTypeShape EntityType="CuahanghoaModel.Khachhang" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuahanghoaModel.Nguoidung" Width="1.5" PointX="10" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuahanghoaModel.Nhacungcap" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuahanghoaModel.Phanquyennguoidung" Width="1.5" PointX="7.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuahanghoaModel.Phieunhap" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuahanghoaModel.Phieunhapchitiet" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuahanghoaModel.Phieuxuat" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuahanghoaModel.Phieuxuatchitiet" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CuahanghoaModel.Sanpham" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <AssociationConnector Association="CuahanghoaModel.FK__Phieuxuat__Idkha__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="CuahanghoaModel.FK__Nguoidung__Idquy__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="CuahanghoaModel.FK__Sanpham__Idnhacu__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="CuahanghoaModel.FK__Phieunhap__Idphi__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="CuahanghoaModel.FK__Phieunhap__Idsan__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="CuahanghoaModel.FK__Phieuxuat__Idphi__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="CuahanghoaModel.FK__Phieuxuat__Idphi__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="CuahanghoaModel.FK__Phieuxuat__Idsan__3B75D760" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
